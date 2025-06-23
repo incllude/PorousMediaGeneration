@@ -1,0 +1,35 @@
+_target_: dataset.datasets.SegmentationDataset
+volume_shape: [3, 64, 64, 64]
+segmentation_paths: 
+  - /kaggle/input/porous-media/mt_simon_cropped_top_segm.npy
+  - /kaggle/input/porous-media/mt_simon_cropped_bottom_segm.npy
+num_samples: 160
+pad_size: 1056
+transforms:
+  _target_: monai.transforms.Compose
+  transforms:
+    - _target_: monai.transforms.RandSpatialCrop
+      roi_size: [256, 256, 256]
+    - _target_: monai.transforms.AsDiscrete
+      to_onehot: 3
+    - _target_: monai.transforms.Resize
+      spatial_size: [64, 64, 64]
+      mode: trilinear
+    - _target_: monai.transforms.RandRotate90
+      prob: 0.5
+      spatial_axes: [0, 1]
+    - _target_: monai.transforms.RandRotate90
+      prob: 0.5
+      spatial_axes: [1, 2]
+    - _target_: monai.transforms.RandRotate90
+      prob: 0.5
+      spatial_axes: [0, 2]
+    - _target_: monai.transforms.RandFlip
+      prob: 0.5
+      spatial_axis: 0
+    - _target_: monai.transforms.RandFlip
+      prob: 0.5
+      spatial_axis: 1
+    - _target_: monai.transforms.RandFlip
+      prob: 0.5
+      spatial_axis: 2

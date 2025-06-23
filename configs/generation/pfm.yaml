@@ -1,0 +1,2 @@
+_target_: models.flow_matching.ProbabilisticFlowMatching
+num_steps: 100

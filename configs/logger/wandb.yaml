@@ -1,0 +1,4 @@
+project: Diploma Generator
+# name: D3PM steps=1000 dit small noise - ln smooth
+name: FM steps=100 unet5 sdf gumbel data thx +cond
+save_dir: ${hydra:runtime.cwd}/logs

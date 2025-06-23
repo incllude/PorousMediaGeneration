@@ -1,0 +1,25 @@
+defaults:
+  - dataset: segmentation
+  - characteristics: full
+  - model: unet
+  - generation: pfm
+  - optimizer: adamw
+  - scheduler: exponential
+  - trainer: default
+  - logger: wandb
+  - _self_
+
+seed: 43
+batch_size: 8
+log_epochs: [49, 1000, 50]
+model_name: segmentation_generator
+checkpoint_dir: /kaggle/working/checkpoints
+
+hydra:
+  job:
+    chdir: True
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}

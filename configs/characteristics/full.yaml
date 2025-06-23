@@ -1,0 +1,6 @@
+porosity:
+  _target_: utils.utils.calculate_porosity_batched
+  _partial_: True
+surface_area:
+  _target_: utils.utils.calculate_surface_area_batched
+  _partial_: True

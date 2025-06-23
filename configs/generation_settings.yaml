@@ -1,0 +1,23 @@
+defaults:
+  - model@segmentation.model: unet
+  - generation@segmentation.generation: pfm
+  - model@tomogram.model: unet_att
+  - generation@tomogram.generation: sgdm
+  - dataset: tomogram
+  - _self_
+
+seed: 42
+num_samples: 100
+volume_shape: [3, 64, 64, 64]
+output_path: /kaggle/working
+segmentation_ckpt: checkpoints/segmentation_generator_epoch=349.pt
+tomogram_ckpt: checkpoints/tomogram_generator_epoch=149.pt
+
+hydra:
+  job:
+    chdir: True
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}

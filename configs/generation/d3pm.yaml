@@ -1,0 +1,6 @@
+_target_: models.d3pm.D3PM
+timesteps: 1000
+beta_schedule: cosine
+transition_type: uniform
+beta_start: 1e-4
+beta_end: 0.02

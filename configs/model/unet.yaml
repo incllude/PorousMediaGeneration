@@ -1,0 +1,10 @@
+_target_: models.unet.UNet
+in_channels: 3
+out_channels: 3
+channels: [32, 64, 128, 256]
+strides: [2, 2, 2]
+num_res_blocks: 2
+dropout: 0.0
+condition_embedding_dim: 256
+attention_levels: [False, False, False]
+use_context: True

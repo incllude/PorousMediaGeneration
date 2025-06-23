@@ -1,0 +1,12 @@
+hydra-core
+lightning
+monai
+torch==2.5
+tensordict==0.6.2
+torchvision==0.20.0
+torchaudio==2.5.0
+diffusers
+torchdiffeq
+scipy
+adamp
+porespy

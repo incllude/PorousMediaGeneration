@@ -1,0 +1,4 @@
+_target_: dataset.datasets.SimpleDataset
+volume_shape: [3, 64, 64, 64]
+segmentation_dir: /kaggle/input/mt-simon-train-samples
+num_samples: 160

@@ -1,0 +1,2 @@
+_target_: adamp.AdamP
+lr: 1e-4

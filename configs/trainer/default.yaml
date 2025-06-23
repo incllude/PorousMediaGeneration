@@ -1,0 +1,11 @@
+_target_: lightning.Trainer
+max_epochs: 400
+accelerator: cuda
+devices: 1
+precision: 16-mixed
+log_every_n_steps: 1
+accumulate_grad_batches: 4
+enable_model_summary: False
+gradient_clip_val: 5
+gradient_clip_algorithm: norm
+deterministic: False

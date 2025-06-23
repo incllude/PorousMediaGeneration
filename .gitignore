@@ -1,0 +1,6 @@
+outputs/
+checkpoints/
+generation/
+original/
+.env
+*.ipynb
