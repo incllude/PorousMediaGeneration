@@ -7,7 +7,7 @@ A deep learning framework for synthetic generation of porous media structures us
 This repository implements a two-stage generative pipeline for porous media synthesis:
 
 1. **Segmentation Generation**: Generation of 3D porous structure segmentation masks with controllable porosity
-2. **Tomogram Translation**: Translation of segmentation masks to realistic tomographic images
+2. **Tomogram Generation**: Translation of segmentation masks to realistic tomographic images
 
 The framework supports multiple generative algorithms including Probabilistic Flow Matching (PFM), Segmentation Guided Diffusion Models (SGDM), and Discrete Denoising Diffusion Probabilistic Models (D3PM).
 
@@ -90,6 +90,26 @@ pip install -r requirements.txt
 
 3. Configure environment variables (optional):
 Create a `.env` file with required API keys and paths.
+
+## Pre-trained Models
+
+Pre-trained model checkpoints are available for download from Google Drive:
+
+**Download Link**: [Model Checkpoints](https://drive.google.com/drive/folders/11XxTdvELqxDNNRSUb3CWpi38OoDIvXFs?usp=sharing)
+
+### Available Models
+
+- `segmentation_generator_epoch=349.pt` - Pre-trained segmentation generation model (626.75 MB)
+- `tomogram_generator_epoch=139.pt` - Pre-trained tomogram translation model (1532.69 MB)
+
+### Setup Instructions
+
+1. Download the checkpoint files from the Google Drive link above
+2. Create a `checkpoints/` directory in the project root
+3. Place the downloaded `.pt` files in the `checkpoints/` directory
+4. Update the checkpoint paths in `configs/generation_settings.yaml` if necessary
+
+**Note**: These models are required for data generation but not for training new models from scratch.
 
 ## Training
 
