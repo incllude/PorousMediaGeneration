@@ -79,7 +79,7 @@ This approach enables independent configuration of segmentation and tomogram gen
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/incllude/PorousMediaGeneration.git
 cd PorousMediaGeneration
 ```
 
