@@ -1,15 +1,17 @@
-# Porous Media Generation
+# CT Data Generation Framework
 
-A deep learning framework for synthetic generation of porous media structures using diffusion models and flow matching techniques. This project enables controllable generation of both segmentation masks and tomographic images of porous materials with specified porosity characteristics.
+A deep learning framework for synthetic generation of CT (Computed Tomography) data with corresponding segmentation masks using diffusion models and flow matching techniques. This project enables controllable generation of both segmentation masks and tomographic images for various applications, with porous media generation serving as a demonstration example.
 
 ## Overview
 
-This repository implements a two-stage generative pipeline for porous media synthesis:
+This repository implements a two-stage generative pipeline for CT data synthesis:
 
-1. **Segmentation Generation**: Generation of 3D porous structure segmentation masks with controllable porosity
+1. **Segmentation Generation**: Generation of 3D structure segmentation masks with controllable properties
 2. **Tomogram Generation**: Translation of segmentation masks to realistic tomographic images
 
 The framework supports multiple generative algorithms including Probabilistic Flow Matching (PFM), Segmentation Guided Diffusion Models (SGDM), and Discrete Denoising Diffusion Probabilistic Models (D3PM).
+
+While the default configuration and pre-trained models are optimized for porous media structures, the underlying architecture and approach are general-purpose and can be adapted for any CT imaging application.
 
 ## Project Structure
 
@@ -23,7 +25,7 @@ PorousMediaGeneration/
 │   ├── scheduler/             # Learning rate scheduler configurations
 │   ├── trainer/               # Training configurations
 │   ├── logger/                # Logging configurations
-│   ├── characteristics/       # Porous media characteristic configurations
+│   ├── characteristics/       # Data characteristic configurations
 │   ├── segmentation_settings.yaml  # Segmentation training configuration
 │   ├── tomogram_settings.yaml      # Tomogram training configuration
 │   └── generation_settings.yaml    # Generation pipeline configuration
@@ -51,7 +53,7 @@ The project utilizes Hydra for hierarchical configuration management. The config
 - **Models**: `unet`, `unet_att`, `dit` - Neural network architectures
 - **Generation Algorithms**: `pfm`, `sgdm`, `d3pm` - Generative model types
 - **Datasets**: `segmentation`, `tomogram` - Data loading configurations
-- **Characteristics**: `full` - Porous media property computation
+- **Characteristics**: `full` - Data property computation
 
 ### Configuration Composition
 
@@ -93,7 +95,7 @@ Create a `.env` file with required API keys and paths.
 
 ## Pre-trained Models
 
-Pre-trained model checkpoints are available for download from Google Drive:
+Pre-trained model checkpoints are available for download from Google Drive. These models are trained on porous media data as a demonstration, but the framework can be adapted for other CT applications:
 
 **Download Link**: [Model Checkpoints](https://drive.google.com/drive/folders/11XxTdvELqxDNNRSUb3CWpi38OoDIvXFs?usp=sharing)
 
@@ -109,7 +111,7 @@ Pre-trained model checkpoints are available for download from Google Drive:
 3. Place the downloaded `.pt` files in the `checkpoints/` directory
 4. Update the checkpoint paths in `configs/generation_settings.yaml` if necessary
 
-**Note**: These models are required for data generation but not for training new models from scratch.
+**Note**: These models are trained on porous media data and are provided as demonstration examples. For other CT applications, you may need to train new models on your specific dataset.
 
 ## Training
 
@@ -127,7 +129,7 @@ python train.py --config tomogram_settings
 
 ### Available Training Configurations
 
-- **segmentation_settings**: Training configuration for porous structure segmentation generation
+- **segmentation_settings**: Training configuration for structure segmentation generation
 - **tomogram_settings**: Training configuration for tomographic image generation
 
 ### Training Parameters
@@ -165,7 +167,7 @@ Generation is controlled through the `generation_settings.yaml` configuration fi
 
 The generation process consists of two stages:
 
-1. **Segmentation Generation**: Creates 3D porous structure masks with specified porosity
+1. **Segmentation Generation**: Creates 3D structure masks with specified properties
 2. **Tomogram Translation**: Converts segmentation masks to realistic tomographic images
 
 ### Generation Commands
@@ -200,9 +202,9 @@ output_path/
 ### Output Formats
 
 - **Tomograms**: 3D NumPy arrays with voxel intensity values
-- **Segmentations**: 3D NumPy arrays with class labels (0: background, 1: polevoy feldspar, 2: pore)
+- **Segmentations**: 3D NumPy arrays with class labels (configurable based on application)
 - **Visualizations**: PNG images showing representative 2D slices
-- **Metadata**: JSON files containing porosity information and generation parameters
+- **Metadata**: JSON files containing characteristic information and generation parameters
 
 ## Model Architectures
 
@@ -218,14 +220,36 @@ output_path/
 - **Segmentation-Guided Diffusion Model (SGDM)**: DDPM-style diffusion
 - **Discrete Denoising Diffusion (D3PM)**: Discrete state space diffusion
 
-## Porous Media Characteristics
+## Adapting for Different CT Applications
 
-The framework computes and utilizes the following porous media properties:
+While the default configuration is optimized for porous media, the framework can be adapted for various CT imaging applications:
 
-- **Porosity**: Volume fraction of pore space
-- **Specific Surface Area**: Surface area per unit volume of solid material
+### Medical Imaging
+- **Lung CT**: Adapt segmentation classes for lung tissue, airways, and lesions
+- **Brain CT**: Configure for brain tissue, ventricles, and pathological structures
+- **Abdominal CT**: Modify for organs, vessels, and pathological findings
 
-These characteristics enable conditional generation of porous structures with desired properties.
+### Industrial CT
+- **Material Science**: Adapt for different material phases and defects
+- **Quality Control**: Configure for product inspection and defect detection
+- **Archaeology**: Modify for artifact analysis and preservation studies
+
+### Customization Steps
+
+1. **Dataset Preparation**: Prepare your CT data with corresponding segmentation masks
+2. **Configuration Updates**: Modify dataset configurations and characteristic computations
+3. **Model Training**: Train new models on your specific data
+4. **Generation**: Use the trained models for synthetic data generation
+
+## Data Characteristics
+
+The framework computes and utilizes various data properties depending on the application:
+
+- **For Porous Media**: Porosity, specific surface area
+- **For Medical Imaging**: Tissue volumes, lesion characteristics
+- **For Industrial CT**: Material phase fractions, defect statistics
+
+These characteristics enable conditional generation of structures with desired properties.
 
 ## License
 
